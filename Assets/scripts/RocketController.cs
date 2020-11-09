@@ -42,8 +42,21 @@ public class RocketController : MonoBehaviour
         shuttleStart = isEngaged;
     }
 
-    public void showFlameParticles()
+    public void ShowFlameParticles()
     {
-        flameParticleSystem.Play();
+        flameParticleSystem?.Play();
     }
+
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Detection confirmed");
+    }
+
+    //void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    collision.gameObject.name
+    // }
+
+
 }
