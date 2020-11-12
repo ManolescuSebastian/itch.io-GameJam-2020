@@ -31,8 +31,6 @@ public class MoonRotation : MonoBehaviour
         
     }
 
-
-
     void Update()
     {
         posX = rotationCenter.position.x + Mathf.Cos(angle) * rotationRadius;

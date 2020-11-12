@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RocketController : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class RocketController : MonoBehaviour
     private ParticleSystem flameParticleSystem;
 
 
+    void Awake()
+    {
+        SystemHandler.onLaunchPressed += DepolyShuttle;
+    }
+
     void Start()
     {
         if (rb2d != null)
@@ -25,7 +31,7 @@ public class RocketController : MonoBehaviour
             return;
         }
         rb2d = GetComponent<Rigidbody2D>();
-        //flameParticleSystem = GetComponent<ParticleSystem>();
+        flameParticleSystem = GetComponent<ParticleSystem>();
     }
 
     void Update()
@@ -37,6 +43,12 @@ public class RocketController : MonoBehaviour
         }
     }
 
+    private void DepolyShuttle(SystemHandler systemHandler)
+    {
+        shuttleStart = true;
+        ShowFlameParticles();
+    }
+
     public void isShuttleStart(bool isEngaged)
     {
         shuttleStart = isEngaged;
@@ -44,19 +56,17 @@ public class RocketController : MonoBehaviour
 
     public void ShowFlameParticles()
     {
+        if (flameParticleSystem == null)
+        {
+            return;
+        }
+
         flameParticleSystem?.Play();
     }
 
-
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Detection confirmed");
+        Destroy(gameObject);
     }
-
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    collision.gameObject.name
-    // }
-
 
 }
