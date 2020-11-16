@@ -12,7 +12,7 @@ public class MeteorMovement : MonoBehaviour
     void Start()
     {
         speed = Random.Range(1.1f, 1.9f);
-        transform.localScale =  Vector2.one * Random.Range(0.1f, 0.3f);
+        transform.localScale =  Vector2.one * Random.Range(0.05f, 0.2f);
     }
 
     // Update is called once per frame

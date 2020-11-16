@@ -21,12 +21,15 @@ public class MeteoriteSpanner : MonoBehaviour
 
     IEnumerator MeteoriteSpawner()
     {
+        Vector2 trasformRand = new Vector2(transform.position.x, transform.position.y + Random.Range(-1f, 1.5f));
         while (true)
         {
-            GameObject meteoriteInstance = Instantiate(meteorite, transform.position, Quaternion.identity);
+            GameObject meteoriteInstance = Instantiate(meteorite, trasformRand, Quaternion.identity);
             meteoriteInstance.transform.parent = gameObject.transform;
 
-            yield return new WaitForSeconds(7);
+            yield return new WaitForSeconds(Random.Range(3, 7));
         }
     }
+
+
 }

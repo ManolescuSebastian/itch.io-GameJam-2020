@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1725029857}
   - component: {fileID: 8399687728531725618}
   - component: {fileID: 1117209160}
+  - component: {fileID: -1279309223374303700}
   m_Layer: 0
   m_Name: spaceMeteors
   m_TagString: Untagged
@@ -135,3 +136,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-1279309223374303700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7922179460138167181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab70fc94e5b5489888412e465febfb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationCenter: {fileID: 0}
+  rotationRadius: 13.68
+  angularSpeed: 0.15
