@@ -14,9 +14,14 @@ public class MoonRotation : MonoBehaviour
     [SerializeField]
     float angularSpeed = 2f;
 
+    [SerializeField]
+    bool randomRadius = false;
+
     private float posX = 0f;
     private float posY = 0f;
     private float angle = 0f;
+
+    private float rotationDivider = 2;
 
     void Start()
     {
@@ -28,14 +33,19 @@ public class MoonRotation : MonoBehaviour
                 rotationCenter = earth[0].transform;
             }
         }
-        
+
+        if (randomRadius)
+        {
+            rotationDivider = Random.Range(1.7f, 3.2f);
+        }
+
     }
 
     void Update()
     {
         posX = rotationCenter.position.x + Mathf.Cos(angle) * rotationRadius;
-        posY = rotationCenter.position.y + Mathf.Sin(angle) * rotationRadius/2;
-
+        posY = rotationCenter.position.y + Mathf.Sin(angle) * rotationRadius / rotationDivider;
+      
         transform.position = new Vector2(posX, posY);
         angle = angle + Time.deltaTime * angularSpeed;
 

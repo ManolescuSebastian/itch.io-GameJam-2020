@@ -20,6 +20,11 @@ public class RocketBuildManager : MonoBehaviour
         {
             rocketList = new List<GameObject>();
         }
+
+        if (shuttleLaunchpad == null)
+        {
+            shuttleLaunchpad = GetComponent<Transform>();
+        }
     }
 
     public void SelectRocket(int type)

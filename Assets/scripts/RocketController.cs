@@ -18,6 +18,9 @@ public class RocketController : MonoBehaviour
     [SerializeField]
     private ParticleSystem flameParticleSystem;
 
+    [SerializeField]
+    private Transform returnPosition;
+
 
     void Awake()
     {
@@ -66,7 +69,18 @@ public class RocketController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+     
+      Destroy(gameObject);
+        
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("meteorite"))
+        {
+            MeteorCharacteristics meteor = collision.gameObject.GetComponent<MeteorCharacteristics>();
+            Debug.Log("Meteorite detected with value: "+ meteor.meteorValue);
+       
+        }
+    }
 }

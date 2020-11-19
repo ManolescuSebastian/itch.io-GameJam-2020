@@ -10,6 +10,12 @@ public class MeteoriteSpanner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        if (meteorite == null)
+        {
+            meteorite = new GameObject();
+        }
+
         StartCoroutine(MeteoriteSpawner());
     }
 
