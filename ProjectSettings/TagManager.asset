@@ -11,6 +11,7 @@ TagManager:
   - transport_rocket
   - resources_rocket
   - defensive_rocket
+  - resource_factory
   layers:
   - Default
   - TransparentFX

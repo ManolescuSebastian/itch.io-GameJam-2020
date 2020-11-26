@@ -7,22 +7,12 @@ public class MeteoriteSpanner : MonoBehaviour
     [SerializeField]
     GameObject meteorite;
 
-    // Start is called before the first frame update
     void Start()
     {
-
         if (meteorite == null)
-        {
             meteorite = new GameObject();
-        }
 
         StartCoroutine(MeteoriteSpawner());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-  
     }
 
     IEnumerator MeteoriteSpawner()
@@ -33,7 +23,7 @@ public class MeteoriteSpanner : MonoBehaviour
             GameObject meteoriteInstance = Instantiate(meteorite, trasformRand, Quaternion.identity);
             meteoriteInstance.transform.parent = gameObject.transform;
 
-            yield return new WaitForSeconds(Random.Range(3, 7));
+            yield return new WaitForSeconds(Random.Range(1, 7));
         }
     }
 

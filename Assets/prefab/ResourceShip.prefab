@@ -98,9 +98,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.35106668
+  m_Mass: 0.35106665
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -148,9 +148,7 @@ MonoBehaviour:
   speed: 5
   maxSpeed: 1.5
   smoothTime: 0.5
-  rb2d: {fileID: 1457334266423663357}
   flameParticleSystem: {fileID: 1457334267124158676}
-  returnPosition: {fileID: 0}
 --- !u!1 &1457334267124158679
 GameObject:
   m_ObjectHideFlags: 0

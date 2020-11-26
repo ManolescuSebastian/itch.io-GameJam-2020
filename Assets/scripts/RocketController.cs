@@ -6,20 +6,19 @@ using System;
 public class RocketController : MonoBehaviour
 {
     [SerializeField]
-    public float speed;
+    private float speed;
     [SerializeField]
-    public float maxSpeed = 1f;
+    private float maxSpeed = 1f;
     [SerializeField]
-    public float smoothTime = 3f;
+    private float smoothTime = 3f;
     private bool shuttleStart = false;
+    private float rotationSpeed = 2f;
 
     [SerializeField]
-    private Rigidbody2D rb2d;
-    [SerializeField]
-    private ParticleSystem flameParticleSystem;
+    public ParticleSystem flameParticleSystem;
 
-    [SerializeField]
-    private Transform returnPosition;
+    private Transform resourceDropPosition;
+    private bool returnToBase = false;
 
 
     void Awake()
@@ -27,23 +26,38 @@ public class RocketController : MonoBehaviour
         SystemHandler.onLaunchPressed += DepolyShuttle;
     }
 
-    void Start()
-    {
-        if (rb2d != null)
-        {
-            return;
-        }
-        rb2d = GetComponent<Rigidbody2D>();
-        flameParticleSystem = GetComponent<ParticleSystem>();
-    }
-
     void Update()
     {
         if (shuttleStart)
         {
-            speed = Mathf.Lerp(speed, maxSpeed, smoothTime);
-            rb2d.transform.Translate(Vector3.up * speed * Time.deltaTime);
+            if (returnToBase)
+            {
+                RotateTowards(resourceDropPosition.position);
+                speed = Mathf.Lerp(speed, maxSpeed, smoothTime);
+                MoveTowards(resourceDropPosition.position);
+            }
+            else
+            {
+                speed = Mathf.Lerp(speed, maxSpeed, smoothTime);
+                transform.Translate(Vector2.up * speed * Time.deltaTime);
+            }
         }
+    }
+
+    private void RotateTowards(Vector2 target)
+    {
+        var offset = -90f;
+        Vector2 direction = target - (Vector2)transform.position;
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
+        Quaternion rotation = Quaternion.AngleAxis(angle + offset, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+    }
+
+    private void MoveTowards(Vector2 target)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
     }
 
     private void DepolyShuttle(SystemHandler systemHandler)
@@ -52,7 +66,7 @@ public class RocketController : MonoBehaviour
         ShowFlameParticles();
     }
 
-    public void isShuttleStart(bool isEngaged)
+    public void CheckShuttleStart(bool isEngaged)
     {
         shuttleStart = isEngaged;
     }
@@ -69,18 +83,30 @@ public class RocketController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-     
       Destroy(gameObject);
-        
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("meteorite"))
         {
-            MeteorCharacteristics meteor = collision.gameObject.GetComponent<MeteorCharacteristics>();
-            Debug.Log("Meteorite detected with value: "+ meteor.meteorValue);
-       
+            MeteorCharacteristics meteorResouceValue = collision.gameObject.GetComponent<MeteorCharacteristics>();
+
+            resourceDropPosition = GameObject.FindGameObjectWithTag("resource_factory").transform;
+            speed = 0.5f;
+            maxSpeed = 1f;
+            smoothTime = 1f;
+            returnToBase = true;
         }
+
+        if (collision.collider.CompareTag("resource_factory"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void OnDisable()
+    {
+        SystemHandler.onLaunchPressed -= DepolyShuttle;
     }
 }
