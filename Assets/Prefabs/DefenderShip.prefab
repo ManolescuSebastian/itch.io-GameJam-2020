@@ -148,8 +148,8 @@ MonoBehaviour:
   speed: 5
   maxSpeed: 1.5
   smoothTime: 0.5
-  rb2d: {fileID: 8148840679740460364}
-  flameParticleSystem: {fileID: 8148840679031801701}
+  FlameParticleSystem: {fileID: 8148840679031801701}
+  typeOfRocket: 0
 --- !u!1 &8148840679031801702
 GameObject:
   m_ObjectHideFlags: 0

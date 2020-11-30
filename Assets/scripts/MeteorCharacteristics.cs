@@ -38,12 +38,12 @@ public class MeteorCharacteristics : MonoBehaviour
             this.GetComponent<SpriteRenderer>().color = new Color(0.9f, 0.5f, 0.1f, 1f);
         }
 
-        meteorValue = roundUp((int)((transform.localScale.x + transform.localScale.y) * 100)) * 3;
+        meteorValue = RoundUp((int)((transform.localScale.x + transform.localScale.y) * 100)) * 3;
     }
 
-    int roundUp(int n)
+    int RoundUp(int value)
     {
-        return (n + 4) / 5 * 5;
+        return (value + 4) / 5 * 5;
     }
 
     void Update()
@@ -58,19 +58,20 @@ public class MeteorCharacteristics : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.collider.CompareTag("resources_rocket"))
         {
+            if (meteorType.Equals(METEOR.URANIUM))
+            {
+                EventManager.TriggerEvent("IncreaseUraniumScore", meteorValue);
+            }
+
+            if (meteorType.Equals(METEOR.TELLERIUM))
+            {
+                EventManager.TriggerEvent("IncreaseTelleriumScore", meteorValue);
+            }
+
             Destroy(gameObject);
-        }
-
-        if (meteorType.Equals(METEOR.URANIUM))
-        {
-            EventManager.TriggerEvent("IncreaseUraniumScore", meteorValue);
-        }
-
-        if (meteorType.Equals(METEOR.TELLERIUM))
-        {
-            EventManager.TriggerEvent("IncreaseTelleriumScore", meteorValue);
         }
     }
 }

@@ -15,11 +15,12 @@ public class RocketController : MonoBehaviour
     private float rotationSpeed = 2f;
 
     [SerializeField]
-    public ParticleSystem flameParticleSystem;
+    public ParticleSystem FlameParticleSystem;
 
     private Transform resourceDropPosition;
     private bool returnToBase = false;
 
+    public ROCKET typeOfRocket;
 
     void Awake()
     {
@@ -50,7 +51,6 @@ public class RocketController : MonoBehaviour
         Vector2 direction = target - (Vector2)transform.position;
         direction.Normalize();
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
         Quaternion rotation = Quaternion.AngleAxis(angle + offset, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
     }
@@ -73,12 +73,12 @@ public class RocketController : MonoBehaviour
 
     public void ShowFlameParticles()
     {
-        if (flameParticleSystem == null)
+        if (FlameParticleSystem == null)
         {
             return;
         }
 
-        flameParticleSystem?.Play();
+        FlameParticleSystem?.Play();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -88,15 +88,33 @@ public class RocketController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("meteorite"))
-        {
-            MeteorCharacteristics meteorResouceValue = collision.gameObject.GetComponent<MeteorCharacteristics>();
 
-            resourceDropPosition = GameObject.FindGameObjectWithTag("resource_factory").transform;
-            speed = 0.5f;
-            maxSpeed = 1f;
-            smoothTime = 1f;
-            returnToBase = true;
+        if (typeOfRocket.Equals(ROCKET.RESOURCES))
+        {
+            //#if !UNITY_EDITOR
+                //Debug.Log("typeOfRocket: " + typeOfRocket);
+            //#endif
+            if (collision.collider.CompareTag("meteorite"))
+            {
+                resourceDropPosition = GameObject.FindGameObjectWithTag("resource_factory").transform;
+                speed = 0.5f;
+                maxSpeed = 1f;
+                smoothTime = 1f;
+                returnToBase = true;
+            }
+            else if(collision.collider.CompareTag("moon"))
+            {
+                //#if !UNITY_EDITOR
+                //    Debug.Log("Destroy Object type: " + typeOfRocket);
+                //#endif
+                Destroy(gameObject);
+            }
+        } else if (typeOfRocket.Equals(ROCKET.TRANSPORTER))
+        {
+            if (collision.collider.CompareTag("moon")) {
+                //todo add transporter rocket animation
+                Destroy(gameObject);
+            }
         }
 
         if (collision.collider.CompareTag("resource_factory"))

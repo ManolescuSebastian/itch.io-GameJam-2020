@@ -26,6 +26,4 @@ public class MeteoriteSpanner : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(1, 7));
         }
     }
-
-
 }

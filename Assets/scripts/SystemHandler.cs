@@ -20,5 +20,4 @@ public class SystemHandler : MonoBehaviour
     {
         onLaunchPressed(this);
     }
-
 }
