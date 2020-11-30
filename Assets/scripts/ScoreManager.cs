@@ -55,8 +55,8 @@ public class ScoreManager : MonoBehaviour
 
     public void DefaultScore()
     {
-        UrnaiumScore = 350;
-        TelleriumScore = 200;
+        UrnaiumScore = 200;
+        TelleriumScore = 150;
     }
 
     public void OnUraniumScoreUpdate(int value)

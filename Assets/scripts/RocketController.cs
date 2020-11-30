@@ -64,6 +64,8 @@ public class RocketController : MonoBehaviour
     {
         shuttleStart = true;
         ShowFlameParticles();
+
+        EventManager.TriggerEvent("RocketLaunchSound");
     }
 
     public void CheckShuttleStart(bool isEngaged)
@@ -88,12 +90,8 @@ public class RocketController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-
         if (typeOfRocket.Equals(ROCKET.RESOURCES))
         {
-            //#if !UNITY_EDITOR
-                //Debug.Log("typeOfRocket: " + typeOfRocket);
-            //#endif
             if (collision.collider.CompareTag("meteorite"))
             {
                 resourceDropPosition = GameObject.FindGameObjectWithTag("resource_factory").transform;
@@ -104,9 +102,6 @@ public class RocketController : MonoBehaviour
             }
             else if(collision.collider.CompareTag("moon"))
             {
-                //#if !UNITY_EDITOR
-                //    Debug.Log("Destroy Object type: " + typeOfRocket);
-                //#endif
                 Destroy(gameObject);
             }
         } else if (typeOfRocket.Equals(ROCKET.TRANSPORTER))
@@ -126,5 +121,10 @@ public class RocketController : MonoBehaviour
     void OnDisable()
     {
         SystemHandler.onLaunchPressed -= DepolyShuttle;
+    }
+
+    void OnDestroy()
+    {
+        EventManager.TriggerEvent("VerifyGameState", 1);
     }
 }

@@ -11,6 +11,9 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     public GameObject PauseButton = default;
 
+    [SerializeField]
+    public GameObject SettingsPanel;
+
 
     public void PauseGame()
     {
@@ -28,6 +31,11 @@ public class MenuController : MonoBehaviour
 
         PauseMenu.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void SettigsPanel(bool state)
+    {
+        SettingsPanel.SetActive(state);
     }
 
 }

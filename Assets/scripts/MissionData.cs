@@ -11,6 +11,11 @@ public class MissionData : MonoBehaviour
     private bool MissionOneCompleted;
     private bool MissionTwoCompleted;
     private bool MissionThreeCompleted;
+    private bool MissionFourCompleted;
+    private bool MissionFiveCompleted;
+
+    private int moonLandingsCount = 0;
+    private int specialMeteorCollectCount = 0;
 
     void Awake()
     {
@@ -46,7 +51,34 @@ public class MissionData : MonoBehaviour
 
     public bool MissionThreeStatusData()
     {
+        if(ScoreManager.TelleriumScore >= 1000)
+        {
+            MissionThreeCompleted = true;
+        }
+
         return MissionThreeCompleted;
+    }
+
+    public bool MissionFourStatusData()
+    {
+        if (specialMeteorCollectCount >= 10)
+        {
+            MissionFourCompleted = true;
+        }
+        return MissionFourCompleted;
+    }
+
+    public bool MissionFiveStatusData()
+    {
+        if (moonLandingsCount >= 1) {
+            MissionFiveCompleted = true;
+        }
+        return MissionFiveCompleted;
+    }
+
+    public void IncreaseMoonLandings()
+    {
+        moonLandingsCount++;
     }
 
     void OnDestroy() {

@@ -34,6 +34,9 @@ public class MissionController : MonoBehaviour
     {
         missionList[0].GetComponent<Toggle>().isOn = MissionData.Instance.MissionOneStatusData();
         missionList[1].GetComponent<Toggle>().isOn = MissionData.Instance.MissionTwoStatusData();
-        missionList[1].GetComponent<Toggle>().isOn = MissionData.Instance.MissionThreeStatusData();
+        missionList[2].GetComponent<Toggle>().isOn = MissionData.Instance.MissionThreeStatusData();
+        missionList[3].GetComponent<Toggle>().isOn = MissionData.Instance.MissionFourStatusData();
+        missionList[4].GetComponent<Toggle>().isOn = MissionData.Instance.MissionFiveStatusData();
+
     }
 }

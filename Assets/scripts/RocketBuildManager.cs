@@ -15,7 +15,7 @@ public class RocketBuildManager : MonoBehaviour
 
     //resource collector purchase values
     private const int RESOURCES_URANIUM_PURCHASE = 50;
-    private const int RESOURCES_TELLERIUM_PURCHASE = 40;
+    private const int RESOURCES_TELLERIUM_PURCHASE = 30;
 
     //defender purchase values
     private const int DEFENCE_URANIUM_PURCHASE = 100;

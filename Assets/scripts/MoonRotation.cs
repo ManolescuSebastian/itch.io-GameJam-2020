@@ -53,4 +53,12 @@ public class MoonRotation : MonoBehaviour
             angle = 0f;
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("transport_rocket")){
+            MissionData.Instance.IncreaseMoonLandings();
+        }
+    }
+
 }
