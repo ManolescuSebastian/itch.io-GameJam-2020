@@ -1,60 +1,128 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Linq;
 
+public enum ROCKET { TRANSPORTER, RESOURCES, DEFENCE, NONE }
+
 public class RocketBuildManager : MonoBehaviour
 {
+    //transporter purchase values
+    private const int TRANSPORTER_URANIUM_PURCHASE = 500;
+    private const int TRANSPORTER_TELLERIUM_PURCHASE = 300;
+
+    //resource collector purchase values
+    private const int RESOURCES_URANIUM_PURCHASE = 50;
+    private const int RESOURCES_TELLERIUM_PURCHASE = 30;
+
+    //defender purchase values
+    private const int DEFENCE_URANIUM_PURCHASE = 100;
+    private const int DEFENCE_TELLERIUM_PURCHASE = 50;
 
     [SerializeField]
-    List<GameObject> rocketList;
+    List<GameObject> availableRockets;
+
     [SerializeField]
     Transform shuttleLaunchpad;
+    [SerializeField]
+    public Button TransporterRocketButton;
+    [SerializeField]
+    public Button ResourceRocketButton;
+
+    private ROCKET rocketType = ROCKET.NONE;
 
     private GameObject currentBuildRocket;
 
     void Start()
     {
-        if (rocketList == null)
+        if (availableRockets == null)
+            availableRockets = new List<GameObject>();
+
+        if (shuttleLaunchpad == null)
+            shuttleLaunchpad = GetComponent<Transform>();
+    }
+
+    public void VerifyBuildResources()
+    {
+        if (ScoreManager.UrnaiumScore < TRANSPORTER_URANIUM_PURCHASE || ScoreManager.TelleriumScore < TRANSPORTER_TELLERIUM_PURCHASE)
         {
-            rocketList = new List<GameObject>();
+            TransporterRocketButton.GetComponent<Image>().color = new Color32(216, 216, 216, 255);
+            TransporterRocketButton.enabled = false;
         }
+        else{
+            TransporterRocketButton.GetComponent<Image>().color = new Color32(80, 207, 122, 255);
+            TransporterRocketButton.enabled = true;
+        }
+
+        if (ScoreManager.UrnaiumScore < RESOURCES_URANIUM_PURCHASE || ScoreManager.TelleriumScore < RESOURCES_TELLERIUM_PURCHASE)
+        {
+            ResourceRocketButton.GetComponent<Image>().color = new Color32(216, 216, 216, 255);
+            ResourceRocketButton.enabled = false;
+        }
+        else
+        {
+            ResourceRocketButton.GetComponent<Image>().color = new Color32(80, 207, 122, 255);
+            ResourceRocketButton.enabled = true;
+        }
+
     }
 
     public void SelectRocket(int type)
     {
-        if (rocketList.Count() <= 0)
-        {
+        if (availableRockets.Count() <= 0)
             return;
-        }
 
         if (currentBuildRocket != null)
-        {
             Destroy(currentBuildRocket);
-        }
 
-       GameObject rocket = rocketList[type];
+       GameObject rocket = availableRockets[type];
        GameObject rocketObject = Instantiate(rocket, shuttleLaunchpad.position, Quaternion.identity);
-       Renderer rocketRenderer = rocketObject.GetComponent<Renderer>();
        rocketObject.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.5f);
        rocketObject.transform.parent = shuttleLaunchpad;
+
+       rocketType = (ROCKET)type;
+       rocketObject.GetComponent<RocketController>().typeOfRocket = rocketType;
 
        currentBuildRocket = rocketObject;
     }
 
-
-
     public void AcceptSelectedRocket()
     {
         if (currentBuildRocket == null)
-        {
             return;
-        }
 
-        Renderer rocketRenderer = currentBuildRocket.GetComponent<Renderer>();
         currentBuildRocket.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
 
+        PurchaseRocket(rocketType);
         currentBuildRocket = null;
+    }
+
+    private void PurchaseRocket(ROCKET rocket)
+    {
+        switch (rocket)
+        {
+           case ROCKET.TRANSPORTER:
+                EventManager.TriggerEvent("IncreaseUraniumScore", -TRANSPORTER_URANIUM_PURCHASE);
+                EventManager.TriggerEvent("IncreaseTelleriumScore", -TRANSPORTER_TELLERIUM_PURCHASE);
+                MissionData.Instance.MissionTwoStatusData(true);
+                break;
+
+            case ROCKET.RESOURCES:
+                EventManager.TriggerEvent("IncreaseUraniumScore", -RESOURCES_URANIUM_PURCHASE);
+                EventManager.TriggerEvent("IncreaseTelleriumScore", -RESOURCES_TELLERIUM_PURCHASE);
+                break;
+
+            case ROCKET.DEFENCE:
+                EventManager.TriggerEvent("IncreaseUraniumScore", -DEFENCE_URANIUM_PURCHASE);
+                EventManager.TriggerEvent("IncreaseTelleriumScore", -DEFENCE_TELLERIUM_PURCHASE);
+                break;
+
+            default:
+                // do nothing at the moment
+                break;
+        }
+
     }
 }

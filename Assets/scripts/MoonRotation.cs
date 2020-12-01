@@ -6,17 +6,21 @@ public class MoonRotation : MonoBehaviour
 {
 
     [SerializeField]
-    Transform rotationCenter;
+    private Transform rotationCenter;
 
     [SerializeField]
-    float rotationRadius = 2f;
+    private float rotationRadius = 2f;
 
     [SerializeField]
-    float angularSpeed = 2f;
+    private float angularSpeed = 2f;
+
+    private bool randomRadius = false;
 
     private float posX = 0f;
     private float posY = 0f;
     private float angle = 0f;
+
+    private float rotationDivider = 2;
 
     void Start()
     {
@@ -28,20 +32,33 @@ public class MoonRotation : MonoBehaviour
                 rotationCenter = earth[0].transform;
             }
         }
-        
+
+        if (randomRadius)
+        {
+            rotationDivider = Random.Range(1.7f, 3f);
+        }
+
     }
 
     void Update()
     {
         posX = rotationCenter.position.x + Mathf.Cos(angle) * rotationRadius;
-        posY = rotationCenter.position.y + Mathf.Sin(angle) * rotationRadius/2;
-
+        posY = rotationCenter.position.y + Mathf.Sin(angle) * rotationRadius / rotationDivider;
+      
         transform.position = new Vector2(posX, posY);
-        angle = angle + Time.deltaTime * angularSpeed;
+        angle += Time.deltaTime * angularSpeed;
 
         if (angle >= 360f)
         {
             angle = 0f;
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("transport_rocket")){
+            MissionData.Instance.IncreaseMoonLandings();
+        }
+    }
+
 }
