@@ -20,7 +20,7 @@ public class GameFlowControl : MonoBehaviour
         EventManager.StopListening("VerifyGameState", VerifyGameState);
     }
 
-    private void VerifyGameState(int value)
+    private void VerifyGameState()
     {
         if ((ScoreManager.UrnaiumScore < 50 || ScoreManager.TelleriumScore < 30) && RocketContainer.transform.childCount <= 0)
         {
