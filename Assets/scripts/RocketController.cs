@@ -116,15 +116,12 @@ public class RocketController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        EventManager.TriggerEvent("VerifyGameState");
     }
 
     void OnDisable()
     {
         SystemHandler.onLaunchPressed -= DepolyShuttle;
-    }
-
-    void OnDestroy()
-    {
-        EventManager.TriggerEvent("VerifyGameState", 1);
     }
 }

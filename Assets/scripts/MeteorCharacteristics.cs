@@ -20,7 +20,7 @@ public class MeteorCharacteristics : MonoBehaviour
 
     void Awake()
     {
-        EventManager.TriggerEvent("VerifyGameState", 1);
+        EventManager.TriggerEvent("VerifyGameState");
     }
 
     void Start()
