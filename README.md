@@ -55,6 +55,8 @@ TODO
 - [ ] Add proper architecture
 - [ ] Improve game performance by adding Object Pooling, improve EventManager, etc.
 - [ ] Add animations and effects 
+- [ ] Add defend base gameplay
+- [ ] Code refactoring
 
 License
 ------
