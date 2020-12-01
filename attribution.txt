@@ -12,3 +12,36 @@ https://www.flaticon.com/free-icon/shuttle_2285537?term=rocket&page=1&position=7
 Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
 https://opengameart.org/content/starship-security-officer by https://www.patreon.com/justinnichol
+
+Moonshot game is part of the 2020 GameJam (GameOver).
+
+The main quest of this game is to send multiple transporter shuttles to the moon, but for that we need resources that are available only on the meteorites that are passing near earth.
+
+The main challenge is to maintain the balance between the two resources so that the shuttle / rocket construction can continue.
+
+
+
+Resources used:
+
+Kenney.nl
+
+https://kenney.nl/assets/space-shooter-extension
+
+Icons from flaticon.com
+
+Icons made by Freepik from www.flaticon.com
+
+
+Sounds and Music
+
+Rocket launch sound by dklon  https://opengameart.org/content/jet-engine-takeoff
+
+Main song: https://opengameart.org/content/space-background-music
+
+Menu song: https://opengameart.org/content/menu-chill-music
+
+Other assets:
+
+https://opengameart.org/content/starship-security-officer
+
+
