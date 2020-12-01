@@ -44,7 +44,7 @@ Game Structure
 
 TODO
 -----
-- [ ] Add proper architecture (MVC)
+- [ ] Add proper architecture
 - [ ] Improve game performance by adding Object Pooling, improve EventManager, etc.
 - [ ] Add animations and effects 
 
