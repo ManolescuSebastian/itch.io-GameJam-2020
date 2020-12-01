@@ -21,6 +21,12 @@ public class ScoreManager : MonoBehaviour
     public static int UrnaiumScore;
     public static int TelleriumScore;
 
+    public void DefaultScore()
+    {
+        UrnaiumScore = 350;
+        TelleriumScore = 200;
+    }
+
     void Awake()
     {
         DefaultScore();
@@ -53,11 +59,6 @@ public class ScoreManager : MonoBehaviour
         EventManager.StopListening("IncreaseTelleriumScore", OnTelleriumScoreUpdate);
     }
 
-    public void DefaultScore()
-    {
-        UrnaiumScore = 200;
-        TelleriumScore = 150;
-    }
 
     public void OnUraniumScoreUpdate(int value)
     {
