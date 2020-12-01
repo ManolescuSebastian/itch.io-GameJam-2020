@@ -12,6 +12,11 @@ https://sebtek.itch.io/moonshot
 OR         
 https://itch.io/jam/game-off-2020/rate/838966            
 
+Screenshots
+-----
+<img src="https://github.com/ManolescuSebastian/itch.io-GameJam-2020/blob/master/demo_images/screenshot_1.png" width="33%"></img>
+<img src="https://github.com/ManolescuSebastian/itch.io-GameJam-2020/blob/master/demo_images/screenshot_3.png" width="33%"></img>
+<img src="https://github.com/ManolescuSebastian/itch.io-GameJam-2020/blob/master/demo_images/screenshot_2.png" width="33%"></img>
 
 
 Game Description
