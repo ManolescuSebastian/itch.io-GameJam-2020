@@ -4,24 +4,49 @@ More details about this game jam [itch.io](https://itch.io/jam/game-off-2020) we
 
 This year theme: <b> MOONSHOT</b>
 
-Game Story 
+Game available
 -----
-//todo
+
+https://sebtek.itch.io/moonshot
+https://itch.io/jam/game-off-2020/rate/838966
+
+
+Game Description
+-----
+Moonshot game is part of the 2020 GameJam (GameOver).
+
+The main quest of this game is to send multiple transporter shuttles to the moon, but for that we need resources that are available only on the meteorites that are passing near earth.
+
+The main challenge is to maintain the balance between the two resources so that the shuttle / rocket construction can continue.
+
 
 Game Scenes
 -----
-//todo
-
+- Main Menu Scene
+- Gameplay Scene
 
 Game Structure
 -----
-//todo
+```bash
+├── Assets
+│   ├── Animation
+│   ├── Fonts
+│   ├── Materials
+│   ├── Prefab
+│   ├── Scenes
+│   ├── Scripts
+│   ├── Sounds
+│   ├── Sprites
+│   └── TextMesh Pro
+│
+└── .gitignore
+```
 
-
-Resources
+TODO
 -----
-//todo
-
+- [ ] Add proper architecture (MVC)
+- [ ] Improve game performance by adding Object Pooling, improve EventManager, etc.
+- [ ] Add animations and effects 
 
 License
 ------
