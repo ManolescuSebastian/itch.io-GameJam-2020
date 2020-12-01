@@ -6,9 +6,12 @@ This year theme: <b> MOONSHOT</b>
 
 Game available
 -----
+https://tekydevelop.com/games/moonshot/            
+OR.          
+https://sebtek.itch.io/moonshot       
+OR         
+https://itch.io/jam/game-off-2020/rate/838966            
 
-https://sebtek.itch.io/moonshot
-https://itch.io/jam/game-off-2020/rate/838966
 
 
 Game Description
