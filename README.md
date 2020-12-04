@@ -21,7 +21,7 @@ Screenshots
 
 Game Description
 -----
-Moonshot game is part of the 2020 GameJam (GameOver).
+Moonshot game is part of the 2020 GameJam (GameOFF).
 
 The main quest of this game is to send multiple transporter shuttles to the moon, but for that we need resources that are available only on the meteorites that are passing near earth.
 
